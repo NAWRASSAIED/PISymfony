@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ include('reservationsajout/_form.html.twig') }}
+
+    {# Assurez-vous que reservation.cinclient est bien l'identifiant du client #}
+     {% for message in app.flashes('error') %}
+    <div class="alert alert-danger flash-message">
+        {{ message }}
+    </div>
+    {% endfor %}
+  
+    {% if reservations.cinclient is defined %}
+        <a href="{{ path('app_reservationsajout_historique', {'cinClient': reservations.cinclient}) }}">
+            Voir l'historique des réservations
+        </a>
+    {% endif %}
+     <style>
+    /* Animation de translation pour le message d'erreur */
+    .flash-message {
+        position: fixed; /* Fixer la position pour que le message reste à droite */
+        top: 310px; /* Ajuster la position verticale pour aligner avec le texte h1 */
+        right: -100%; /* Démarrer à droite de la page */
+        opacity: 0;
+        transition: opacity 0.5s, right 0.5s; /* Ajouter la transition vers la droite */
+        max-width: 300px; /* Limiter la largeur du flash message */
+        background-color: #ff4444; /* Couleur de fond pour les erreurs */
+        color: #fff; /* Couleur du texte */
+        padding: 15px; /* Rembourrage interne */
+        border-radius: 5px; /* Coins arrondis */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    }
+
+    .flash-message.show {
+        right: 20px; /* Arrêter à une certaine distance de la droite (ajuster si nécessaire) */
+        opacity: 1;
+    }
+</style>
+
+<script>
+     // Attendre que le DOM soit chargé
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sélectionner tous les éléments avec la classe flash-message
+        var flashMessages = document.querySelectorAll('.flash-message');
+
+        // Ajouter la classe show à chaque élément après un court délai
+        flashMessages.forEach(function(message) {
+            setTimeout(function() {
+                message.classList.add('show');
+            }, 100);
+           
+            // Supprimer la classe show après 10 secondes
+            setTimeout(function() {
+                message.classList.remove('show');
+            }, 15000);
+        });
+    });
+</script>
+{% endblock %}
+
+

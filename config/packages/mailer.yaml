@@ -1,0 +1,4 @@
+framework:
+    mailer:
+        dsn: 'smtp://nawras.saied%40esprit.tn:223JFT1007@smtp.gmail.com:587?encryption=tls&auth_mode=login'
+      

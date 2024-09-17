@@ -1,0 +1,52 @@
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+           
+
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+            {# Afficher les messages d'erreur globaux du formulaire #}
+            {{ form_errors(form) }}
+
+            <div class="mb-3">
+                {{ form_label(form.numfacture) }}
+                {{ form_widget(form.numfacture, {'attr': {'class': 'form-control'}}) }}
+                <div class="text-danger" style="font-size: 14px; margin-top: 5px;">
+                    {{ form_errors(form.numfacture) }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.montantFacture) }}
+                {{ form_widget(form.montantFacture, {'attr': {'class': 'form-control'}}) }}
+                <div class="text-danger" style="font-size: 14px; margin-top: 5px;">
+                    {{ form_errors(form.montantFacture) }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.datePaiement) }}
+                {{ form_widget(form.datePaiement, {'attr': {'class': 'form-control'}}) }}
+                <div class="text-danger" style="font-size: 14px; margin-top: 5px;">
+                    {{ form_errors(form.datePaiement) }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.numres) }}
+                {{ form_widget(form.numres, {'attr': {'class': 'form-control'}}) }}
+                <div class="text-danger" style="font-size: 14px; margin-top: 5px;">
+                    {{ form_errors(form.numres) }}
+                </div>
+            </div>
+
+            <div class="text-center">
+                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+

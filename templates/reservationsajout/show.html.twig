@@ -1,0 +1,59 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Reservations{% endblock %}
+
+{% block main %}
+    <h1 style="margin-left:500px;">Réservation:</h1>
+
+    <table class="table">
+        <tbody>
+           
+            <tr>
+                <th>Cinclient</th>
+                <td>{{ reservation.cinclient }}</td>
+            </tr>
+            <tr>
+                <th>Nomclient</th>
+                <td>{{ reservation.nomclient }}</td>
+            </tr>
+            <tr>
+                <th>Nombrepersonnes</th>
+                <td>{{ reservation.nombrepersonnes }}</td>
+            </tr>
+            <tr>
+                <th>Datedebut</th>
+                <td>{{ reservation.datedebut ? reservation.datedebut|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Datefin</th>
+                <td>{{ reservation.datefin ? reservation.datefin|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ModePaiement</th>
+                <td>{{ reservation.modePaiement }}</td>
+            </tr>
+            <tr>
+                <th>Typehebergement</th>
+                <td>{{ reservation.typehebergement }}</td>
+            </tr>
+            <tr>
+                <th>Typeactivite</th>
+                <td>{{ reservation.typeactivite }}</td>
+            </tr>
+            <tr>
+                <th>Numtel</th>
+                <td>{{ reservation.numtel }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservationsajout_index') }}">Retour</a>
+
+  <a href="{{ path('app_reservationsajout_edit', {'idreservation': reservation.idreservation}) }}" class="custom-link">
+    <span class="link-text">Modifier</span>
+</a>
+
+
+
+    {{ include('reservationsajout/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Edit Reservations{% endblock %}
+
+{% block main %}
+    <h1>Modifier Reservations</h1>
+
+    {{ include('reservationsajout/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_reservationsajout_index') }}">back to list</a>
+
+    {{ include('reservationsajout/_delete_form.html.twig') }}
+{% endblock %}
+

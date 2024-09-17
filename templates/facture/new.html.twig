@@ -1,0 +1,11 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}New Facture{% endblock %}
+
+{% block main %}
+   
+ <h1 style="margin-left:450px; margin-top: 50px;">Nouvelle Facture</h1>
+    {{ include('facture/_form.html.twig') }}
+
+    <a href="{{ path('app_facture_index') }}">Retour</a>
+{% endblock %}

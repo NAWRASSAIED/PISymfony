@@ -1,0 +1,92 @@
+{# templates/reservationsajout/historique.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique des Réservations{% endblock %}
+
+{% block body %}
+    {% for flash_message in app.session.flashbag.get('success') %}
+    <div class="alert alert-success flash-message">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
+    <h1 class="mb-4">Historique des Réservations</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Cinclient</th>
+                    <th scope="col">Nomclient</th>
+                    <th scope="col">Nombrepersonnes</th>
+                    <th scope="col">Date de début</th>
+                    <th scope="col">Date de fin</th>
+                    <th scope="col">Mode de paiement</th>
+                    <th scope="col">Type d'hébergement</th>
+                    <th scope="col">Type d'activité</th>
+                    <th scope="col">Numéro de téléphone</th>
+                    <!-- Ajoutez d'autres colonnes au besoin -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.cinclient }}</td>
+                        <td>{{ reservation.nomclient }}</td>
+                        <td>{{ reservation.nombrepersonnes }}</td>
+                        <td>{{ reservation.datedebut ? reservation.datedebut|date('Y-m-d') : '' }}</td>
+                        <td>{{ reservation.datefin ? reservation.datefin|date('Y-m-d') : '' }}</td>
+                        <td>{{ reservation.modePaiement }}</td>
+                        <td>{{ reservation.typehebergement }}</td>
+                        <td>{{ reservation.typeactivite }}</td>
+                        <td>{{ reservation.numtel }}</td>
+                        <!-- Ajoutez d'autres colonnes au besoin -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ path('app') }}" class="btn btn-secondary mt-3">Retour </a>
+      <style>
+        /* Animation de translation pour le message flash */
+       .flash-message {
+        position: fixed; /* Fixer la position pour que le message reste à droite */
+        top: 310px; /* Ajuster la position verticale si nécessaire */
+        right: -100%; /* Démarrer à droite de la page */
+        opacity: 0;
+        transition: opacity 0.5s, right 0.5s; /* Ajouter la transition vers la droite */
+        max-width: 300px; /* Limiter la largeur du flash message */
+        background-color: #4CAF50; /* Couleur de fond */
+        color: #fff; /* Couleur du texte */
+        padding: 15px; /* Rembourrage interne */
+        border-radius: 5px; /* Coins arrondis */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    }
+
+    .flash-message.show {
+        right: 20px; /* Arrêter à une certaine distance de la droite (ajuster si nécessaire) */
+        opacity: 1;
+    }
+    </style>
+
+    <script>
+        // Attendre que le DOM soit chargé
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sélectionner tous les éléments avec la classe flash-message
+        var flashMessages = document.querySelectorAll('.flash-message');
+
+        // Ajouter la classe show à chaque élément après un court délai
+        flashMessages.forEach(function(message) {
+            setTimeout(function() {
+                message.classList.add('show');
+            }, 100);
+           
+            // Supprimer la classe show après 10 secondes
+            setTimeout(function() {
+                message.classList.remove('show');
+            }, 5000);
+        });
+    });
+    </script>
+{% endblock %}

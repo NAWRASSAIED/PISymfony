@@ -1,0 +1,80 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Facture index{% endblock %}
+
+{% block main %}
+    <h1 style="margin-left:450px; margin-top: 50px;">Liste des factures</h1>
+     <div>
+        <a href="{{ path('app_facture_index', {'sort': 'asc'}) }}" class="btn btn-primary">Tri Croissant</a>
+        <a href="{{ path('app_facture_index', {'sort': 'desc'}) }}" class="btn btn-primary">Tri Décroissant</a>
+    </div>
+     <input type="text" id="searchInput" placeholder="Rechercher" style="box-sizing: border-box; width: 200px; padding: 10px; border: 2px solid #ccc; border-radius: 4px; font-size: 16px; transition: width 0.3s ease-in-out;" onfocus="this.style.width='300px'" onblur="this.style.width='200px'" />
+
+    <div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numfacture</th>
+                <th>MontantFacture</th>
+                <th>DatePaiement</th>
+                <th>Actions</th>
+                <th>Générer PDF</th> {# Nouvelle colonne pour le bouton Générer PDF #}
+                <th>Envoyer par Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for facture in factures %}
+            <tr>
+                <td>{{ facture.numfacture }}</td>
+                <td>{{ facture.montantFacture }}</td>
+                <td>{{ facture.datePaiement }}</td>
+                <td>
+                    <a href="{{ path('app_facture_show', {'idFacture': facture.idFacture}) }}">Afficher</a>
+                    <a href="{{ path('app_facture_edit', {'idFacture': facture.idFacture}) }}">Modifier</a>
+                </td>
+                
+
+             <td>
+               <a href="{{ path('generate_pdf', {'idFacture': facture.idFacture}) }}" class="btn btn-success" style="display: inline-block; padding: 10px 20px; font-size: 14px; font-weight: bold; text-align: center; text-decoration: none; background-color: #4CAF50; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease;">Générer PDF</a>
+            </td>
+              <td>
+     <form action="{{ path('send_email', {'idFacture': facture.idFacture}) }}" method="post" style="display: flex; margin-left: 10px; margin-top:0.5px;background-color: #f2f2f2; padding: 10px; border-radius: 10px;">
+    <input type="email" name="email" placeholder="Votre adresse e-mail" required style="padding: 5px; border: 1px solid #f2f2f2; border-radius: 3px; font-size: 11px; width: 150px;">
+    <button type="submit" class="btn btn-success" style="font-size: 14px; padding: 8px 16px; background-color: #28a745; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease;">Envoyer</button>
+</form>
+
+
+    </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+     
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#searchInput").on("input", function () {
+            var value = $(this).val().toLowerCase();
+
+            $("tbody tr").filter(function () {
+                var row = $(this);
+                var numfactureMatch = row.find("td:eq(0)").text().toLowerCase().includes(value);
+                var montantFactureMatch = row.find("td:eq(1)").text().toLowerCase().includes(value);
+                var datePaiementMatch = row.find("td:eq(2)").text().toLowerCase().includes(value);
+
+                row.toggle(numfactureMatch || montantFactureMatch || datePaiementMatch);
+            });
+        });
+    });
+</script>
+
+    <a href="{{ path('app_facture_new') }}" class="btn btn-primary">
+        <i class="fa fa-plus"></i> Créer Facture
+    </a>
+
+{% endblock %}

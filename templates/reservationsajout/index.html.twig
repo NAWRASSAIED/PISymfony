@@ -1,0 +1,71 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Reservations index{% endblock %}
+
+{% block main %}
+    <h1 style="margin-left:500px;">Liste des Réservations</h1>
+
+    <a href="{{ path('app_reservationsajout_index', {'sort': 'asc'}) }}" class="btn btn-primary">Ascending Sort</a>
+    <a href="{{ path('app_reservationsajout_index', {'sort': 'desc'}) }}" class="btn btn-primary">Descending Sort</a>
+  <a href="{{ path('app_stat', {'cinClient': reservations[1].getCinclient()}) }}" class="btn btn-primary">
+    View Statistics
+</a>
+
+
+
+    {# Formulaire de recherche avancée #}
+    <form id="advancedSearchForm">
+        <label for="search">Recherche avancée :</label>
+        <input type="text" id="search" name="search" placeholder="Entrez un terme de recherche">
+    </form>
+
+    <div class="table-container">
+        <table class="table" id="reservationTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>CIN Client</th>
+                    <th>Nom Client</th>
+                    <th>Nombre Personnes</th>
+                    <th>Date Début</th>
+                    <th>Date Fin</th>
+                    <th>Mode Paiement</th>
+                    <th>Type Hébergement</th>
+                    <th>Type Activité</th>
+                    <th>Num Tel</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# Les lignes de la table seront insérées ici dynamiquement via JavaScript #}
+                {% include 'reservationsajout/_table_rows.html.twig' with {'reservations': reservations} %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#search").on("input", function () {
+            var value = $(this).val().toLowerCase();
+
+            $("tbody tr").filter(function () {
+                var row = $(this);
+                var columns = row.find("td");
+                var match = false;
+
+                // Check each column for a match
+                columns.each(function () {
+                    if ($(this).text().toLowerCase().includes(value)) {
+                        match = true;
+                        return false; // Break out of the loop if a match is found
+                    }
+                });
+
+                row.toggle(match);
+            });
+        });
+    });
+</script>
+
+{% endblock %}

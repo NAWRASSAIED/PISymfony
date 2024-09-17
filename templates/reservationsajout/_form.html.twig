@@ -1,0 +1,89 @@
+
+<center>
+  {% block title %}<h1 id="newres" style="margin-bottom: 50px;">New Reservation</h1>{% endblock %}
+
+  {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'style': 'margin-top: 50px;'}}) }}
+
+
+{# Afficher les messages d'erreur globaux du formulaire #}
+{{ form_errors(form) }}
+
+<div>
+    {{ form_label(form.cinclient) }}
+    {{ form_widget(form.cinclient, {'attr': {'class': 'form-control'}}) }}
+    <div style="color: red; font-size: 14px; margin-top: 5px;">
+        {{ form_errors(form.cinclient) }}
+    </div>
+</div>
+
+<div>
+    {{ form_label(form.nomclient) }}
+    {{ form_widget(form.nomclient, {'attr': {'class': 'form-control'}}) }}
+    <div style="color: red; font-size: 14px; margin-top: 5px;">
+        {{ form_errors(form.nomclient) }}
+    </div>
+</div>
+
+<div>
+    {{ form_label(form.nombrepersonnes) }}
+    {{ form_widget(form.nombrepersonnes, {'attr': {'class': 'form-control'}}) }}
+    <div style="color: red; font-size: 14px; margin-top: 5px;">
+        {{ form_errors(form.nombrepersonnes) }}
+    </div>
+</div>
+
+<div>
+    {{ form_label(form.datedebut) }}
+    {{ form_widget(form.datedebut, {'attr': {'class': 'form-control'}}) }}
+    <div style="color: red; font-size: 14px; margin-top: 5px;">
+        {{ form_errors(form.datedebut) }}
+    </div>
+</div>
+
+<div>
+    {{ form_label(form.datefin) }}
+    {{ form_widget(form.datefin, {'attr': {'class': 'form-control'}}) }}
+    <div style="color: red; font-size: 14px; margin-top: 5px;">
+        {{ form_errors(form.datefin) }}
+    </div>
+</div>
+
+<div>
+    {{ form_label(form.modePaiement) }}
+    {{ form_widget(form.modePaiement, {'attr': {'class': 'form-control'}}) }}
+    <div style="color: red; font-size: 14px; margin-top: 5px;">
+        {{ form_errors(form.modePaiement) }}
+    </div>
+</div>
+
+<div>
+    {{ form_label(form.typehebergement) }}
+    {{ form_widget(form.typehebergement, {'attr': {'class': 'form-control'}}) }}
+    <div style="color: red; font-size: 14px; margin-top: 5px;">
+        {{ form_errors(form.typehebergement) }}
+    </div>
+</div>
+
+<div>
+    {{ form_label(form.typeactivite) }}
+    {{ form_widget(form.typeactivite, {'attr': {'class': 'form-control'}}) }}
+    <div style="color: red; font-size: 14px; margin-top: 5px;">
+        {{ form_errors(form.typeactivite) }}
+    </div>
+</div>
+
+<div>
+    {{ form_label(form.numtel) }}
+    {{ form_widget(form.numtel, {'attr': {'class': 'form-control'}}) }}
+    <div style="color: red; font-size: 14px; margin-top: 5px;">
+        {{ form_errors(form.numtel) }}
+    </div>
+</div>
+
+<div>
+    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+</div>
+
+{{ form_end(form) }}
+
+</center>

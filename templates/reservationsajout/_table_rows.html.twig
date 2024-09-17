@@ -1,0 +1,19 @@
+{# templates/reservationsajout/_table_rows.html.twig #}
+{% for reservation in reservations %}
+    <tr>
+        <td>{{ reservation.idreservation }}</td>
+        <td>{{ reservation.cinclient }}</td>
+        <td>{{ reservation.nomclient }}</td>
+        <td>{{ reservation.nombrepersonnes }}</td>
+        <td>{{ reservation.datedebut ? reservation.datedebut|date('Y-m-d') : '' }}</td>
+        <td>{{ reservation.datefin ? reservation.datefin|date('Y-m-d') : '' }}</td>
+        <td>{{ reservation.modePaiement }}</td>
+        <td>{{ reservation.typehebergement }}</td>
+        <td>{{ reservation.typeactivite }}</td>
+        <td>{{ reservation.numtel }}</td>
+        <td>
+            <a href="{{ path('app_reservationsajout_show', {'idreservation': reservation.idreservation}) }}">Afficher</a>
+            <a href="{{ path('app_reservationsajout_edit', {'idreservation': reservation.idreservation}) }}">Modifier</a>
+        </td>
+    </tr>
+{% endfor %}
